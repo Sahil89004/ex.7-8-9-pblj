@@ -1,12 +1,23 @@
-package com.example.springdi;
+package com.example.hibernatecrud;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import java.util.List;
 
 public class MainApp {
     public static void main(String[] args) {
-        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-        Student student = context.getBean(Student.class);
-        student.showDetails();
+        StudentDAO dao = new StudentDAO();
+
+        // Create
+        dao.saveStudent(new Student("Amit", "Java"));
+        dao.saveStudent(new Student("Neha", "Python"));
+
+        // Read
+        List<Student> list = dao.getStudents();
+        list.forEach(s -> System.out.println(s.getId() + " " + s.getName() + " " + s.getCourse()));
+
+        // Update
+        dao.updateStudent(1, "Spring Boot");
+
+        // Delete
+        dao.deleteStudent(2);
     }
 }

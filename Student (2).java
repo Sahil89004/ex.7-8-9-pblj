@@ -1,14 +1,32 @@
-package com.example.springdi;
+package com.example.hibernatecrud;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "students")
 public class Student {
-    private Course course;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    public Student(Course course) {
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private String course;
+
+    public Student() {}
+
+    public Student(String name, String course) {
+        this.name = name;
         this.course = course;
     }
 
-    public void showDetails() {
-        System.out.println("Student is enrolled in: ");
-        course.displayCourse();
-    }
+    // Getters and setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public String getCourse() { return course; }
+    public void setCourse(String course) { this.course = course; }
 }
